@@ -2,54 +2,77 @@
 
 Converts SWF animations to HTML, using the Google's Swiffy online converter.
 
+# Requirements
 
+[Node.js](http://nodejs.org)
 
 # CLI
 
 Install globally with npm
 
-    $ npm install -g swiffy-convert
+```bash
+$ npm install -g swiffy-convert
+```
 
 Then convert SWF files to HTML:
 
-    swiffy-convert projects/flash-anims/**/*.swf
+```bash
+$ swiffy-convert projects/flash-anims/**/*.swf
+```
 
 JSON objects only:
 
-    swiffy-convert projects/flash-anims/**/*.swf -j
-    swiffy-convert projects/flash-anims/**/*.swf --json
+```bash
+$ swiffy-convert projects/flash-anims/**/*.swf -j
+$ swiffy-convert projects/flash-anims/**/*.swf --json
+```
 
 Don't include the `runtime.js`:
 
-    swiffy-convert projects/flash-anims/**/*.swf -s
-    swiffy-convert projects/flash-anims/**/*.swf --skip-runtime
+```bash
+$ swiffy-convert projects/flash-anims/**/*.swf -s
+$ swiffy-convert projects/flash-anims/**/*.swf --skip-runtime
+```
 
 Specify an output directory:
 
-    swiffy-convert projects/flash-anims/**/*.swf -o ~/Desktop
-    swiffy-convert projects/flash-anims/**/*.swf --output ~/Desktop
+```bash
+$ swiffy-convert projects/flash-anims/**/*.swf -o ~/Desktop
+$ swiffy-convert projects/flash-anims/**/*.swf --output ~/Desktop
+```
 
-Save to Desktop, as JSON:
+Mix flags. For example, save JSON files to Desktop:
 
-    swiffy-convert projects/flash-anims/**/*.swf -jo ~/Desktop
+```bash
+$ swiffy-convert projects/flash-anims/**/*.swf -jo ~/Desktop
+```
 
 
 # Node.js
 
 Install on your project
 
-    $ npm install swiffy-convert
+```bash
+$ npm install swiffy-convert
+```
 
 Then use it as a module:
 
-    var swiffyConvert = require('swiffy-convert');
-    swiffyConvert('path/to/file.swf', {json: false, skipRuntime: false, output: ''}, function(error, body) {
-        if (error) {
-          return console.log(error);
-        }
+```javascript
+var swiffyConvert = require('swiffy-convert');
+swiffyConvert('path/to/file.swf', {
+  json: false,
+  skipRuntime: false,
+  outputDir: ''
+  }, function(error, body) {
 
-        console.log('Swiffy HTML:\n' + body);
-      });
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Swiffy HTML:\n' + body);
+  }
+);
+```
 
 # License
 
