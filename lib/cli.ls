@@ -25,7 +25,7 @@ cli.main (args, options) ->
 
   files := args.concat!
   total := files.length
-  for til 10 then convert-file options
+  for til Math.min files.length, 10 then convert-file options
 
 
 function convert-file options
