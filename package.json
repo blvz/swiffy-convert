@@ -1,6 +1,6 @@
 {
   "name": "swiffy-convert",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "Converts SWF animations to HTML, using the Google's Swiffy online converter.",
   "homepage": "https://github.com/blvz/swiffy-convert",
   "keywords": [
@@ -18,14 +18,24 @@
     "swiffy-convert": "./bin/swiffy-convert"
   },
   "scripts": {
-    "prepublish": "make package.json"
+    "prepublish": "make metadata",
+    "test": "make test"
   },
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
   "dependencies": {
     "cli": "^0.6",
     "glob": "^4",
     "colors": "^0.6",
-    "request": "^2.40",
-    "LiveScript": "^1.2"
+    "request": "^2.40"
+  },
+  "devDependencies": {
+    "vows": "^0.8.1",
+    "vows-at": "^0.0.1",
+    "LiveScript": "^1.3"
   },
   "author": "Rafael Belvederese <rafael@blvz.im>",
   "license": "MIT"

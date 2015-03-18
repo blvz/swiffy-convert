@@ -2,11 +2,11 @@
 
 Converts SWF animations to HTML, using the Google's Swiffy online converter.
 
-# Requirements
+## Requirements
 
 [Node.js](http://nodejs.org)
 
-# CLI
+## CLI
 
 Install globally with npm
 
@@ -34,21 +34,8 @@ $ swiffy-convert projects/flash-anims/**/*.swf -s
 $ swiffy-convert projects/flash-anims/**/*.swf --skip-runtime
 ```
 
-Specify an output directory:
 
-```bash
-$ swiffy-convert projects/flash-anims/**/*.swf -o ~/Desktop
-$ swiffy-convert projects/flash-anims/**/*.swf --output ~/Desktop
-```
-
-Mix flags. For example, save JSON files to Desktop:
-
-```bash
-$ swiffy-convert projects/flash-anims/**/*.swf -jo ~/Desktop
-```
-
-
-# Node.js
+## Node.js
 
 Install on your project
 
@@ -59,21 +46,45 @@ $ npm install swiffy-convert
 Then use it as a module:
 
 ```javascript
-var swiffyConvert = require('swiffy-convert');
-swiffyConvert('path/to/file.swf', {
-  json: false,
-  skipRuntime: false,
-  outputDir: ''
-  }, function(error, body) {
+var fs = require('fs');
+var convert = require('swiffy-convert');
 
-    if (error) {
-      return console.log(error);
-    }
-    console.log('Swiffy HTML:\n' + body);
+var path = 'path/to/file.swf',
+    buf  = fs.readfileSync(path),
+    strm = fs.createReadStream(path);
+
+// convert a file in a path
+convert('path/to/file.swf', function(err, result) {
+    if (err) return console.error(err);
+
+    fs.writeFileSync('path/to/file.swf.html', result.output.html);
+    fs.writeFileSync('path/to/file.swf.json', result.output.json);
+    console.log(result);
   }
 );
+
+// convert a file, by its buffer
+convert(buf, function(err, result) {
+  if (err) return console.error(err);
+  console.log(result);
+});
+
+// convert a file stream
+convert(strm, function(err, result) {
+  if (err) return console.error(err);
+  console.log(result);
+});
 ```
 
-# License
+
+## DIY
+
+This project was done in [LiveScript](https://github.com/gkz/LiveScript).
+`make install` installs it locally, along with any other dependency.
+`make build` compiles the `src` to JavaScript.
+`make test` builds everything and run the tests.
+
+
+## License
 
 MIT

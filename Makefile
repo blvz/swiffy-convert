@@ -1,10 +1,19 @@
 default: all
 
-LSC = node_modules/LiveScript/bin/lsc
+LSC=./node_modules/LiveScript/bin/lsc
 
 all: build
 
-build: package.json
+metadata: package.json.ls
+	@ [ -f "$(LSC)" ] || npm install LiveScript
+	@ $(LSC) -c *.json.ls
 
-package.json: package.json.ls
-	$(LSC) --compile package.json.ls
+build: metadata
+	@ $(LSC) -c src/lib/*.ls
+	@ mv src/lib/*.js lib
+
+test: build
+	@ $(LSC) test/*.ls
+
+install: metadata
+	@ npm install

@@ -2,7 +2,6 @@
 
 var path = require('path'),
     fs   = require('fs'),
-    LiveScript   = require('LiveScript'),
     lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 
 require(lib + '/cli');
