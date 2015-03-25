@@ -39,10 +39,11 @@ module.exports = !function convert file, callback
   return callback? err if err
   return callback? body.error.message if body.error?
 
-  html = body.result.response.output
-         |> -> new Buffer it, \base64
-         |> zlib.gunzip-sync
-         |> (.to-string!)
+  zip = body.result.response.output
+        |> -> new Buffer it, \base64
+
+  err, html <- zlib.gunzip zip
+  html .= to-string!
 
   json = (.1) <| html is /swiffyobject\s*=\s*({.*});\s*<\/script>/
 
