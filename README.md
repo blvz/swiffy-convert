@@ -50,7 +50,7 @@ var fs = require('fs');
 var convert = require('swiffy-convert');
 
 var path = 'path/to/file.swf',
-    buf  = fs.readfileSync(path),
+    buf  = fs.readFileSync(path),
     strm = fs.createReadStream(path);
 
 // convert a file in a path
