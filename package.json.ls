@@ -1,10 +1,10 @@
 name: \swiffy-convert
-version: \1.1.0
+version: \1.1.1
 description: 'Converts SWF animations to HTML, using
             \ Google\'s Swiffy online converter.'
 
 engines:
-  node: '>=0.11'
+  node: '>=0.10'
 
 homepage: 'https://github.com/blvz/swiffy-convert'
 keywords: <[ adobe flash swf google swiffy ]>
