@@ -1,4 +1,4 @@
-require! <[ fs cli colors ./convert ]>
+require! <[ fs path cli colors ./convert glob ]>
 cli .= enable \glob
 
 cli.parse do
@@ -14,20 +14,18 @@ total = 0
 files = []
 
 cli.main (args, options) ->
-  files := args.concat!map -> tries: 0 path: it
+  files := args.map -> tries: 0 path: glob.sync it
   total := files.length
   console.log ''
   for til Math.min files.length, 10 then convert-file options
 
 function convert-file options
-  file = files.shift!
-  [path, parent, name] = /^(.+)\/([^\/]*)$/ is file.path
-  ext    = if options.json then \json else \html
-  output = "#parent/#name.#ext"
+  file   = files.shift!
+  output = file.path + \. + if options.json then \json else \html
 
   file.tries++
 
-  err, obj <- convert path
+  err, obj <- convert file.path
 
   if err
     console.error "Error converting #{file.path}
@@ -41,7 +39,8 @@ function convert-file options
 
   fs.write-file-sync output, if options.json then json else html
 
-  console.log "[#{++count} of #total] ".green + output
+  console.log "[#{++count} of #total] ".green +
+  path.relative process.cwd!, output
   if obj.messages
     for msg in obj.messages
     then console.log "[ #{msg.type} ] ".yellow + msg.description
