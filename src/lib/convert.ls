@@ -39,6 +39,9 @@ module.exports = !function convert file, callback
   return callback? err if err
   return callback? body.error.message if body.error?
 
+  unless body.result.response.output?length
+    return callback? body.result.response.status
+
   zip = body.result.response.output
         |> -> new Buffer it, \base64
 
