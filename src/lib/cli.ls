@@ -12,19 +12,19 @@ total = 0
 files = []
 
 cli.main (args, options) ->
-  files := args.map -> path: glob.sync it
+  for p in args then files ++= glob.sync p
   total := files.length
   console.log ''
   for til Math.min files.length, 10 then convert-file options
 
 function convert-file options
   file   = files.shift!
-  output = file.path + \. + if options.json then \json else \html
+  output = file + \. + if options.json then \json else \html
 
-  err, obj <- convert file.path
+  err, obj <- convert file
 
   if err
-    console.error "Error converting #{file.path}:"
+    console.error "Error converting #file:"
     console.error err + '\n'
     return
 
