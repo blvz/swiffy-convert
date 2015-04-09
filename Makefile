@@ -9,7 +9,7 @@ metadata: package.json.ls
 	@ $(LSC) -c *.json.ls
 
 build: metadata
-	@ $(LSC) -c src/lib/*.ls
+	@ $(LSC) -cb src/lib/*.ls
 	@ mv src/lib/*.js lib
 
 test: build
