@@ -34,6 +34,12 @@ $ swiffy-convert projects/flash-anims/**/*.swf -s
 $ swiffy-convert projects/flash-anims/**/*.swf --skip-runtime
 ```
 
+You can also get the convertion results printed as JSON, one by line:
+
+```bash
+$ swiffy-convert projects/flash-anims/**/*.swf --reporter json
+```
+
 
 ## Node.js
 
