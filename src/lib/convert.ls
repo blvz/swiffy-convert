@@ -10,7 +10,7 @@ module.exports = !function convert file, callback
   if file instanceof stream.Stream
     do
       err, buf <- stream-to-buffer file
-      return console.error 'Couldn\'t convert stream to buffer.' err if err
+      return callback? err if err
       convert buf, callback
     return void
 
