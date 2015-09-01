@@ -36,7 +36,9 @@ module.exports = !function convert file, callback
         client: 'Swiffy Flash Extension for Mac v1.1.1'
         input: input
 
+  { status-code, status-message } = res
   return callback? err if err
+  return callback? "[ #{status-code} ] #{status-message}" if status-code >= 400
   return callback? body.error.message if body.error?
 
   unless body.result.response.output?length
