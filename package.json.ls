@@ -1,5 +1,5 @@
 name: \swiffy-convert
-version: \1.2.0
+version: \1.2.1
 description: 'Converts SWF animations to HTML, using
             \ Google\'s Swiffy online converter.'
 
